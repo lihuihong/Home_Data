@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title>上海市房地产数据分析中心</title>
+	<!-- 引入 Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .bg_image_fluid{
+            text-align: center;
+            background-image: url(./images/index-bg.svg);
+            background-size: cover;
+		    background-repeat: no-repeat;
+		    background-position: top;
+            background-position: center -200px; 
+            padding-top: 12%;
+            padding-bottom: 10%;
+            color:white;
+            margin-top: -120px;
+            margin-left: -2px
+        }
+        .login_btn{
+        	float: right;
+        	color:white;
+        	width: 100px;
+        	border: white 1px solid;
+    		padding: 5px;
+		    text-align: center;
+		    float: right;
+		    height: 30px;
+		    border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-5">
+            	<img src="images/logo.png" style="width:40px"/>
+            	<!-- <h3 style="color:white">上海市房地产数据分析中心</h3>
+                <a href="index.html">上海市房地产数据分析中心</a> -->
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-2" style="padding-top: 10px;">
+               	<a href="login.html" class="login_btn">后台管理</a>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="bg_image_fluid">
+      <div class="container" style="height:150px">
+           <div class="row">
+           		<div class="col-md-4"></div>
+                <div class="col-md-4">
+                	<h3 style="color:white">二手电子产品数据分析中心</h3>
+                	<br/>
+                    <div class="stu_content">
+                         <form class="bs-example bs-example-form" role="form">
+		                    <div class="input-group">
+		                        <div class="input-group-btn">
+		                            <button type="button" style="margin-right: -2px;" class="btn btn-default
+		                                            dropdown-toggle" data-toggle="dropdown">
+		                                            <a id="select_name">新房</a>
+		                                <span class="caret"></span>
+		                            </button>
+		                            <ul class="dropdown-menu">
+		                                <li>
+		                                    <a href="javascript:selectName('新房');">新房</a>
+		                                </li>
+		                                <li>
+		                                    <a href="javascript:selectName('租房');">租房</a>
+		                                </li>
+		                                <li>
+		                                    <a href="javascript:selectName('二手房');">二手房</a>
+		                                </li>
+		                            </ul>
+		                        </div>
+		                        <input type="text" class="form-control" id="search_content">
+		                        <span class="input-group-btn">
+		                            <button class="btn btn-primary" type="button" id="btn_search" style="background-color: #91c8ff;border-color: #91c8ff;">搜 索</button>
+		                        </span>
+		                    </div>
+		                </form>
+                    </div>
+                    <br/>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+  <div class="content">
+    <div class="container">
+      <div class="row" style="margin-top:-50px">
+      <div class="col-md-3">
+        	<div style="border-radius: 10px;border:1px solid #F2F2F2;margin-bottom: 20px">
+				<ul style="margin: 0px;padding: 10px;list-style: none">
+					<li id="content" style="font-size: 15px;color: #ff4444;">这是一条新闻！</li>
+					<li id="time" style="float: right">2019-04-22</li>
+					<div style="clear: both;"></div>
+				</ul>
+			</div>
+        	<div style="border-radius: 10px;border:1px solid #F2F2F2;margin-bottom: 20px;padding: 20px">
+				<a id="send_msg" style="display:block;text-align: center">
+					<img src="/images/send_msg.png" style="display: block;width: 50%;margin: 0 auto;margin-bottom: 10px"/>
+					<span style="border-radius: 50px;background: blueviolet;color: white;padding: 6px 15px;">前 往 留 言</span>
+				</a>
+			</div>
+        </div>
+        <div class="col-md-3">
+        	<a href="page/new_analy.html" style="display: block"> <div class="lecturer-item">
+				<img class="lecturer-img" src="images/item1.png" />
+				<span>新 房</span>
+				<p>关于新房的</p>
+				<p>数据可视化分析</p>
+			</div>
+			</a>
+        </div>
+        <div class="col-md-3">
+			<a href="page/rent_analy.html" style="display: block"> <div class="lecturer-item">
+				<img class="lecturer-img" src="images/item3.png" />
+				<span>租 房</span>
+				<p>关于租房的</p>
+				<p>数据可视化分析</p>
+			</div>
+			</a>
+        </div>
+        <div class="col-md-3">
+			<a href="page/second_analy.html" style="display: block"> <div class="lecturer-item">
+				<img class="lecturer-img" src="images/item2.png" />
+				<span>二 手 房</span>
+				<p>关于二手房的</p>
+				<p>数据可视化分析</p>
+			</div>
+			</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+	function selectName(name){
+	    $('#select_name').text(name);
+	}
+    function format(shijianchuo) {
+        var time = new Date(shijianchuo);
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+'-'+m+'-'+d+' '+h+':'+mm+':'+s;
+    }
+    layui.use(["table"],function() {
+
+		var $ = layui.jquery;
+
+        $.ajax({
+            url:'/notice?method=first',
+            type:'post',
+            dataType:"json",
+            async:false,
+            success:function(result){
+                var str = "";
+                if(result.code===0){
+
+					$('#content').html(result.data.content);
+					$('#time').html(format(result.data.time));
+                }
+
+            },
+            error:function(data){
+                //do something
+                layer.msg('与服务器连接失败',{icon: 2});
+            }
+        });
+
+        var $ = layui.jquery;
+
+        $('#btn_search').click(function () {
+            layer.open({
+                title: '搜索详情',
+                type: 2,
+                shade: false,
+                area: ['950px', '650px'],
+                maxmin: true,
+                btnAlign: 'c',
+                anim: 0,
+                shade: [0.5, 'rgb(0,0,0)'],
+                content: 'page/search_list.jsp',
+                zIndex: layer.zIndex, //重点1
+                success: function(layero,index){
+                    // 获取子页面的iframe
+                    var iframe = window['layui-layer-iframe' + index];
+
+                    data = {
+                        "type":$('#select_name').text(),
+						"keyword":$('#search_content').val()
+					};
+
+                    // 向子页面的全局函数child传参
+                    iframe.child(data);
+                }
+            });
+        });
+
+        $('#send_msg').click(function () {
+            layer.open({
+                title: '新增留言信息',
+                type: 2,
+                shade: false,
+                area: ['650px', '450px'],
+                maxmin: true,
+                btnAlign: 'c',
+                anim: 0,
+                shade: [0.5, 'rgb(0,0,0)'],
+                content: 'page/edit.jsp',
+                zIndex: layer.zIndex, //重点1
+                success: function(layero,index){
+                }
+            });
+        });
+    });
+</script>
+</html>

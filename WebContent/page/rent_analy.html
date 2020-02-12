@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title>上海市房地产数据分析中心</title>
+	<!-- 引入 Bootstrap -->
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+	<style>
+		.layui-table-view{border-radius: 5px;box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);background: #fff;}
+		.card{
+			border-radius: 5px;box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);background: #fff;
+			margin: 10px 0px 10px 20px;
+			padding: 20px;
+			display: none;
+		}
+		.layui-form-label{text-align: left;}
+		.title{padding-bottom: 10px;color: #1e9fff;margin-bottom: 20px;border-bottom: 1px solid;}
+		.echarts{
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #e3e3e3;
+			margin: 10px;
+			border-radius: 5px;
+		}
+		.head{
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+<div class="layui-container">
+	<div class="layui-row head">
+		<div class="layui-col-md4">
+			<table class="layui-hide" id="tableList" lay-filter="tableList1"></table>
+		</div>
+		<div class="layui-col-md8">
+			<div id="echarts1" class="echarts" style="width: 100%;height:400px;"></div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/echarts.js"></script>
+<script type="text/javascript" src="/js/macarons.js"></script>
+<script type="text/javascript">
+
+    layui.use(["table"],function() {
+        var table = layui.table;
+        var $ = layui.jquery;
+
+        var echarts1 = echarts.init(document.getElementById('echarts1'),'macarons');
+        // 显示标题，图例和空的坐标轴
+        echarts1.setOption({
+            title: {
+                text: '租房数据分析'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis: {data: []},
+            yAxis: {},
+            series: []
+        });
+
+        echarts1.showLoading();    //数据加载完之前先显示一段简单的loading动画
+
+        var names = [];    //类别数组（实际用来盛放X轴坐标值）
+        var nums = [];    //销量数组（实际用来盛放Y坐标值）
+        var price = [];    //销量数组（实际用来盛放Y坐标值）
+
+        $.ajax({
+            type: "post",
+            async: true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+            url: "/renthome?method=dataByRegion",    //请求发送到TestServlet处
+            data: {},
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                if (result.code == 0) {
+
+                    $.each(result.data,function (idx,val) {
+                        names.push(val.region);
+                        nums.push(val.count);    //挨个取出销量并填入销量数组
+                        price.push(val.price);    //挨个取出销量并填入销量数组
+                    });
+
+                    echarts1.hideLoading();    //隐藏加载动画
+                    echarts1.setOption({        //加载数据图表
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : names
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value',
+                                name : '房源数量',
+                                axisLabel : {
+                                    formatter: '{value}'
+                                }
+                            },
+                            {
+                                type : 'value',
+                                name : '销售价格',
+                                axisLabel : {
+                                    formatter: '{value}'
+                                }
+                            }
+                        ],
+                        legend: {
+                            data: ['房源数量','平米均价','平米均价']
+                        },
+                        series: [
+                            {
+                                name:'房源数量',
+                                type:'bar',
+                                data:nums
+                            },
+                            {
+                                name:'平米均价',
+                                type:'bar',
+                                data:price
+                            }
+						]
+                    });
+
+                }
+
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                echarts1.hideLoading();
+            }
+        });
+
+
+        //加载表格
+        table.render({
+            elem: '#tableList',
+            //data: table_data['data'],
+            url: '/renthome?method=dataByRegion',
+            method: 'post',
+            skin: 'nob',
+            size: 'lg',
+            cols: [[
+                {field: 'region', title: '地区', align: 'center'},
+                {field: 'price', title: '平米均价', align: 'center'},
+                {field: 'count', title: '房源数量', align: 'center'}
+            ]],
+            page: true
+        });
+    });
+
+</script>
+</html>
